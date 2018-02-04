@@ -8,35 +8,50 @@
 #   Red Hat, Inc.- initial API and implementation
 
 
+# ORI FROM registry.centos.org/che-stacks/centos-stack-base
 FROM s390x/ubuntu:xenial
 
 EXPOSE 4403 8080 8000 9876 22
 
-RUN apt-get update && apt-get install sudo
 
-RUN sudo apt-get -y update && \
-    sudo apt-get -y install  \
-           maven \
-           nodejs \
-           g++ \
-           gcc \
-           make \
-           golang \
-#           plexus-classworlds \
-#           rh-nodejs6 \
-#			nodejs \
-#         g++ \
-#         build-essential \ 
-#         gcc \
-#         glibc-devel \
-#         bzip2 \
-#         make \
-#         golang \
-#  sudo apt-get clean all && \
-#  cat /opt/rh/rh-maven35/enable >> /home/user/.bashrc  && \
-#  cat /opt/rh/rh-nodejs6/enable >> /home/user/.bashrc && \
-#  sudo ln -s /opt/rh/rh-nodejs6/root/usr/bin/node /usr/local/bin/nodejs
-#
+
+#RUN sudo yum -y update && \
+#   sudo yum -y install  \
+#          rh-maven35 \
+#          plexus-classworlds \
+#          rh-nodejs6 \
+#          gcc-c++ \
+#          gcc \
+#          glibc-devel \
+#          bzip2 \
+#          make \
+#          golang \
+#   sudo yum clean all && \
+#   cat /opt/rh/rh-maven35/enable >> /home/user/.bashrc  && \
+#   cat /opt/rh/rh-nodejs6/enable >> /home/user/.bashrc && \
+#   sudo ln -s /opt/rh/rh-nodejs6/root/usr/bin/node /usr/local/bin/nodejs
+RUN apt-get update
+RUN apt-get -y install \
+	build-essential \
+	sudo \
+	bash \
+	maven \
+#	plexus-classworlds
+	nodejs \
+	g++ \
+	gcc \
+#   glibc-devel
+	bzip2 \
+	make \
+	golang \
+	
+# - NEW
+	wget \
+	unzip \
+	sed
+
+
+
 #ENV TOMCAT_VERSION=8.5.23
 #
 #RUN mkdir $HOME/.m2 && \
@@ -47,7 +62,9 @@ RUN sudo apt-get -y update && \
 #   sed -i -- 's/autoDeploy=\"false\"/autoDeploy=\"true\"/g' /home/user/tomcat8/conf/server.xml; \
 #   sed -i 's/<Context>/<Context reloadable=\"true\">/g' /home/user/tomcat8/conf/context.xml; \
 #   echo "export MAVEN_OPTS=\$JAVA_OPTS" >> /home/user/.bashrc
-#
+ENV TOMCAT_VERSION=8.5.25
+RUN mkdir $HOME/.m2
+
 #USER user
 #
 #ENV LD_LIBRARY_PATH=/opt/rh/rh-nodejs6/root/usr/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}} \
@@ -78,3 +95,4 @@ RUN sudo apt-get -y update && \
 #WORKDIR /projects
 #ENTRYPOINT ["/home/user/entrypoint.sh"]
 #CMD tail -f /dev/null
+#
