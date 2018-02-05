@@ -1,3 +1,8 @@
+# Adjusted Docker File for node-alpine for s390x Architectures
+# run "sudo docker build -t mhart/alpine-node ." in order to create a docker
+# image.
+
+
 FROM s390x/alpine:3.6
 
 # ENV VERSION=v4.8.7 NPM_VERSION=2
