@@ -19,8 +19,9 @@
 # use (to run puppet config):
 #   docker run <puppet-mounts> --entrypoint=/usr/bin/puppet eclipse/che-init:<version> apply <puppet-apply-options>
 
+# Version adjusted for s390x, runs with the same command as stated above.
 
-FROM puppet/puppet-agent-alpine:4.6.2
+FROM puppet/puppet-agent-alpine
 
 # install openssh needed to generate ssh keys
 RUN apk --update add openssh \

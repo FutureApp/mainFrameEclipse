@@ -1,3 +1,8 @@
+# Adjusted Dockerfile to build puppet-agent-alpine for s390x Architectures
+# Run from the file directory "sudo docker build -t 
+# 'puppet/puppet-agent-alpine' ." in order to create a 
+# Docker image. Requires alpine docker image with tag s390x/alpine:3.6.
+
 FROM s390x/alpine:3.6
 MAINTAINER Gareth Rushgrove "gareth@puppet.com"
 

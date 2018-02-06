@@ -6,7 +6,7 @@
 #
 # Contributors:
 #   Marian Labuda
-FROM my-alpine
+FROM s390x/alpine
 
 # ncurses is used to use --pretty option of bats
 RUN apk add --no-cache bash ncurses curl 
