@@ -10,8 +10,9 @@ RUN curl -fSL "https://download.docker.com/linux/static/stable/s390x/docker-17.0
    && docker -v
 
 RUN echo working
-RUN git clone https://github.com/FutureApp/mainFrameEclipse.git
-RUN cd mainFrameEclipse && mvn clean install
+RUN mkdir myHome
+RUN cd myHome && git clone https://github.com/FutureApp/mainFrameEclipse.git
+RUN echo "hellO"
 
-RUN tail -f /dev/null
 
+CMD exec /bin/bash -c "trap : TERM INT; sleep infinity & wait"
