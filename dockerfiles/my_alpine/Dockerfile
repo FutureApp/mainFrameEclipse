@@ -10,7 +10,7 @@
 # use:
 #    docker run eclipse/che-base
 
-FROM s390x/alpine:3.6
+FROM s390x/alpine
 
 # install packages
 # coreutils is required for iso8601 compliant date utility
@@ -21,6 +21,7 @@ RUN mkdir -p /version \
    && mkdir /scripts/ \
    && apk add --no-cache ca-certificates coreutils curl openssl bash jq tar \
    && apk add --update bash \
+   && apk add --update nodejs \
    && rm -rf /var/cache/apk/* \
    && set -x \ 
    && curl -fSL "https://download.docker.com/linux/static/stable/s390x/docker-17.09.1-ce.tgz" -o docker.tgz \

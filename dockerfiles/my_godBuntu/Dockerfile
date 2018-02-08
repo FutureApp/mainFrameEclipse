@@ -13,6 +13,8 @@ RUN echo working
 RUN mkdir myHome
 RUN cd myHome && git clone https://github.com/FutureApp/mainFrameEclipse.git
 RUN echo "hellO"
+RUN sudo apt-get -y  install openjdk-8-jre icedtea-8-plugin 
+RUn sudo apt-get -y install openjdk-8-jdk openjdk-8-demo openjdk-8-doc openjdk-8-jre-headless openjdk-8-source 
 
 
 CMD exec /bin/bash -c "trap : TERM INT; sleep infinity & wait"

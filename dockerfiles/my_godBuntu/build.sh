@@ -1,0 +1,1 @@
+sudo docker built -t my-buntu .

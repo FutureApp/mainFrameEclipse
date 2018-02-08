@@ -10,7 +10,8 @@
 # use:
 #    docker run -v /var/run/docker.sock:/var/run/docker.sock eclipse/che-lib [command]
 
-FROM mhart/alpine-node:6
+FROM my-alpine
+#FROM s390x/alpine-node:6
 
 ENV DOCKER_BUCKET=get.docker.com \
     DOCKER_VERSION=1.6.0
@@ -20,7 +21,7 @@ RUN set -x \
         ca-certificates \
         curl \
         openssl \
-        && curl -sL "https://${DOCKER_BUCKET}/builds/Linux/x86_64/docker-$DOCKER_VERSION" \
+        && curl -sL "https://download.docker.com/linux/static/stable/s390x/docker-17.09.1-ce.tgz" \
         > /usr/bin/docker; chmod +x /usr/bin/docker \
         && apk del curl ca-certificates openssl
 

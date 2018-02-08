@@ -19,7 +19,8 @@
 #             -v /home/user/che/storage:/home/user/che/storage \
 #             codenvy/che-server
 #           
-FROM openjdk:8u131-jre-alpine
+#FROM openjdk:8u131-jre-alpine
+FROM my-alpine
 
 ENV LANG=C.UTF-8 \
     DOCKER_VERSION=1.6.0 \
@@ -28,7 +29,7 @@ ENV LANG=C.UTF-8 \
 
 RUN echo "http://dl-4.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
     apk add --update curl openssl sudo bash && \
-    curl -sSL "https://${DOCKER_BUCKET}/builds/Linux/x86_64/docker-${DOCKER_VERSION}" -o /usr/bin/docker && \
+    curl -sSL "https://download.docker.com/linux/static/stable/s390x/docker-17.09.1-ce.tgz" -o /usr/bin/docker && \
     chmod +x /usr/bin/docker && \
     echo "%root ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
     rm -rf /tmp/* /var/cache/apk/*
