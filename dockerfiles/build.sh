@@ -31,6 +31,8 @@ build_directory() {
   shift
   # Calling build.sh
   if [ -e ${directory}/build.sh ] ; then
+  	printf "${RED} calling this ${directory}build.sh ${OPTIONS} ${ARGS} ${NC}\n"
+  	sleep 5 
     ${directory}build.sh ${OPTIONS} ${ARGS}
     DIRECTORIES_PROCESSED="${DIRECTORIES_PROCESSED} ${directory}"
   else

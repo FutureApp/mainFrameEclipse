@@ -10,6 +10,9 @@
 #   Red Hat, Inc.- initial API and implementation
 #
 
+
+echo "Right im running -- ${$0}
+
 init_global_variables () {
   # For coloring console output
   BLUE='\033[1;34m'

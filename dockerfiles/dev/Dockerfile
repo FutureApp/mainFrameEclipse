@@ -9,6 +9,7 @@
 
 
 FROM my-buntu
+RUN echo "dev is building and used"
 
 EXPOSE 4403 8080 8000 9876 22
 

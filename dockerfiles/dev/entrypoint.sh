@@ -7,7 +7,7 @@
 #
 # Contributors:
 #   Red Hat, Inc.- initial API and implementation
-
+echo "Using me .. {$0}
 set -e
 
 export USER_ID=$(id -u)
