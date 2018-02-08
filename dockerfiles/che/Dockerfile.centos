@@ -19,7 +19,7 @@
 #            -v ~/.che/workspaces:/data \
 #            eclipse/che-server:nightly
 #           
-FROM registry.centos.org/centos/centos:latest
+FROM my-buntu
 
 ENV LANG=C.UTF-8 \
     JAVA_HOME=/usr/lib/jvm/jre-1.8.0 \
@@ -29,20 +29,16 @@ ENV LANG=C.UTF-8 \
     DOCKER_BUCKET=get.docker.com \
     CHE_IN_CONTAINER=true
 
-RUN yum -y update && \
-    yum -y install openssl java sudo && \
-    curl -sSL "https://${DOCKER_BUCKET}/builds/Linux/x86_64/docker-${DOCKER_VERSION}" -o /usr/bin/docker && \
+RUN    curl -sSL "https://download.docker.com/linux/static/stable/s390x/docker-17.09.1-ce.tgz" -o /usr/bin/docker && \
     chmod +x /usr/bin/docker && \
-    yum -y remove openssl && \
-    yum clean all && \
     echo "%root ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
     sed -i 's/Defaults    requiretty/#Defaults    requiretty/g' /etc/sudoers && \
     rm -rf /tmp/* /var/cache/yum
 
 # The following lines are needed to set the correct locale after `yum update`
 # c.f. https://github.com/CentOS/sig-cloud-instance-images/issues/71
-RUN localedef -i en_US -f UTF-8 C.UTF-8
-ENV LANG="C.UTF-8"
+#RUN localedef -i en_US -f UTF-8 C.UTF-8
+#ENV LANG="C.UTF-8"
 
 EXPOSE 8000 8080
 COPY entrypoint.sh /entrypoint.sh

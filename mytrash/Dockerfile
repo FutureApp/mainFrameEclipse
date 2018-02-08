@@ -1,1 +1,0 @@
-FROM registry.centos.org/che-stacks/centos-stack-base

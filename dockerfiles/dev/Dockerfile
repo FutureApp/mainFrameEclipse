@@ -8,25 +8,10 @@
 #   Red Hat, Inc.- initial API and implementation
 
 
-FROM s390x/ubuntu:xenial
+FROM my-buntu
 
 EXPOSE 4403 8080 8000 9876 22
 
-#RUN sudo yum -y update && \
-#    sudo yum -y install  \
-#           rh-maven35 \
-#           plexus-classworlds \
-#           rh-nodejs6 \
-#           gcc-c++ \
-#           gcc \
-#           glibc-devel \
-#           bzip2 \
-#           make \
-#           golang \
-#    sudo yum clean all && \
-#    cat /opt/rh/rh-maven35/enable >> /home/user/.bashrc  && \
-#    cat /opt/rh/rh-nodejs6/enable >> /home/user/.bashrc && \
-#    sudo ln -s /opt/rh/rh-nodejs6/root/usr/bin/node /usr/local/bin/nodejs
     
 RUN apt-get -y update
 RUN apt-get -y install sudo
