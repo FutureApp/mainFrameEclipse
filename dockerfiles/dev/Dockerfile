@@ -1,13 +1,3 @@
-# Copyright (c) 2012-2017 Red Hat, Inc.
-# All rights reserved. This program and the accompanying materials
-# are made available under the terms of the Eclipse Public License v1.0
-# which accompanies this distribution, and is available at
-# http://www.eclipse.org/legal/epl-v10.html
-#
-# Contributors:
-#   Red Hat, Inc.- initial API and implementation
-
-
 FROM my-buntu
 RUN echo "dev is building and used"
 
@@ -43,7 +33,7 @@ ENV TOMCAT_VERSION=8.5.23
 
 #---------------------------------------------- [EXTRAS] ---
 RUN sudo apt-get -y update
-RUN sudo apt-get -y install build-essential checkinstall
+RUN sudo apt-get -y install build-essential checkinstall unzip golang man python
 RUN sudo apt-get -y install libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev
 RUN cd /usr/src
 RUN sudo wget https://www.python.org/ftp/python/2.7.14/Python-2.7.14.tgz && sudo tar xzf Python-2.7.14.tgz
@@ -60,18 +50,33 @@ RUN mkdir $HOME/.m2 && \
 
 
 #---------------------------------------------- [NOT WORKED ON] ---
-ENV LD_LIBRARY_PATH=/opt/rh/rh-nodejs6/root/usr/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}} \
- PYTHONPATH=/opt/rh/rh-nodejs6/root/usr/lib/python2.7/site-packages${PYTHONPATH:+:${PYTHONPATH}} \
- MANPATH=/opt/rh/rh-nodejs6/root/usr/share/man:$MANPATH \
- TOMCAT_HOME=/home/user/tomcat8 \
+ENV LD_LIBRARY_PATH=usr/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}} \
+ M2_HOME=/usr/share/maven \
+ GOPATH=/usr/bin/go \
  TERM=xterm  \
- M2_HOME=/opt/rh/rh-maven35/root/usr/share/maven \
- GOPATH=$HOME/go \
- NODEJS_VERSION=6 \
  NPM_RUN=start \
- NPM_CONFIG_PREFIX=$HOME/.npm-
+ NPM_CONFIG_PREFIX=$HOME/.npm- \
+ TOMCAT_HOME=/home/user/tomcat8 \
+ MANPATH=/usr/share/man:$MANPATH \
+ PYTHONPATH=usr/lib/python2.7/${PYTHONPATH:+:${PYTHONPATH}} \
+ NODEJS_VERSION=4.2.6
+ 
  
  ENV PATH=$HOME/node_modules/.bin/:$HOME/.npm-global/bin/:$GOPATH/bin:$M2_HOME/bin:/opt/rh/rh-nodejs6/root/usr/bin:/usr/local/go/bin:$PATH
+ ENV PATH=$HOME/node_modules/.bin/::$GOPATH:$M2_HOME/bin:$PATH
+#---------------------------------------------- [NOT WORKED ON] ---
+#ENV LD_LIBRARY_PATH=/opt/rh/rh-nodejs6/root/usr/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}} \
+# PYTHONPATH=/opt/rh/rh-nodejs6/root/usr/lib/python2.7/site-packages${PYTHONPATH:+:${PYTHONPATH}} \
+# MANPATH=/opt/rh/rh-nodejs6/root/usr/share/man:$MANPATH \
+# TOMCAT_HOME=/home/user/tomcat8 \
+# TERM=xterm  \
+# M2_HOME=/opt/rh/rh-maven35/root/usr/share/maven \
+# GOPATH=$HOME/go \
+# NODEJS_VERSION=6 \
+# NPM_RUN=start \
+# NPM_CONFIG_PREFIX=$HOME/.npm-
+# 
+# ENV PATH=$HOME/node_modules/.bin/:$HOME/.npm-global/bin/:$GOPATH/bin:$M2_HOME/bin:/opt/rh/rh-nodejs6/root/usr/bin:/usr/local/go/bin:$PATH
  
  RUN mkdir /home/user/traefik ;\
      wget -O /home/user/traefik/traefik "https://github.com/containous/traefik/releases/download/v1.4.3/traefik_linux-amd64"; \
@@ -88,5 +93,3 @@ ENV LD_LIBRARY_PATH=/opt/rh/rh-nodejs6/root/usr/lib64${LD_LIBRARY_PATH:+:${LD_LI
  WORKDIR /projects
  ENTRYPOINT ["/home/user/entrypoint.sh"]
  CMD tail -f /dev/null
-
- 
