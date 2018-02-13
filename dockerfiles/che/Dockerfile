@@ -28,8 +28,7 @@ ENV LANG=C.UTF-8 \
     DOCKER_BUCKET=get.docker.com \
     CHE_IN_CONTAINER=true
 
-RUN echo "http://dl-4.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
-    apt-get update && apt-get install curl openssl sudo bash && \
+RUN apt-get update && apt-get install curl openssl sudo bash && \
     curl -sSL "https://download.docker.com/linux/static/stable/s390x/docker-17.09.1-ce.tgz" -o /usr/bin/docker && \
     chmod +x /usr/bin/docker && \
     echo "%root ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \

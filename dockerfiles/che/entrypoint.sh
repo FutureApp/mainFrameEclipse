@@ -11,7 +11,7 @@
 #
 
 
-echo "Right im running che-moduls
+echo "Right im running che-moduls"
 
 init_global_variables () {
   # For coloring console output

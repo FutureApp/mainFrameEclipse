@@ -15,7 +15,7 @@ sudo docker build -t "maven:3.3-jdk-8" /home/linux1/work/che/dockerfiles/my_godB
 cd /home/linux1/work/ && sudo chmod -v -R 777 che
 
 # Kommentier mich aus, wenn ich einmal gelaufen bin :D
-#cd /home/linux1/work/che/assembly/assembly-main  && sudo mvn clean install	
+cd /home/linux1/work/che/assembly/assembly-main  && sudo mvn clean install	
 
 
 
